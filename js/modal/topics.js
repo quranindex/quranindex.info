@@ -1,0 +1,1 @@
+QI.fixes.alphabetHtmlElementExists=setInterval(function(){$("#alphabetTerms").length&&($("#alphabetTerms").listnav({arabic:"ar"===i18n.lng()||"ar"===QI.globals.lang,initLetter:"a",flagDisabled:!0,includeNums:!1,noMatchText:i18n.t("modal.no-topic"),showCounts:!0,cookieName:"term-list"}),clearInterval(QI.fixes.alphabetHtmlElementExists))},300);
