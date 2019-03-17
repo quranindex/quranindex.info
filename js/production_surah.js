@@ -10380,6 +10380,7 @@ var QI = {};
 QI.globals = {
 	// debug: 0,
     base_url: $("#qi-config").attr("data-base-url"),
+    cdn_url: $("#qi-config").attr("data-cdn-url"),
     lang: $("#qi-config").attr("data-lang"),
     env: $("#qi-config").attr("data-env"),
     pageType: parseInt($("#qi-config").attr("data-page-type")),
@@ -11133,8 +11134,8 @@ String.prototype.ucfirst = function() {
         selectorAttr: 'data-i18n',
         debug: false,
     
-        resGetPath: QI.globals.base_url+'locales/__lng__/__ns__.json', // kamal
-        resPostPath: QI.globals.base_url+'locales/add/__lng__/__ns__',
+        resGetPath: ( (QI.globals.env !== "prod") ? QI.globals.cdn_url : QI.globals.base_url ) + 'locales/__lng__/__ns__.json', // kamal
+        resPostPath: ( (QI.globals.env !== "prod") ? QI.globals.cdn_url : QI.globals.base_url ) + 'locales/add/__lng__/__ns__',
     
         getAsync: true,
         postAsync: true,

@@ -1,0 +1,10 @@
+{
+  "name": "Quran Index - فهرس القرآن",
+  "short_name": "Quran Index",
+  "description": "Search Holy Quran Surahs, Verses, Topics, Translations, Reciters, MP3 and PDF Downloads",
+  "lang": "en-US",
+  "start_url": "/",
+  "display": "minimal-ui",
+  "orientation": "any",
+  "theme_color": "#F3F3D6"
+}
