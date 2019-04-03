@@ -25048,14 +25048,6 @@ QI.functions = {
 //     });
 // }
 
-// get googleplus count
-// function googleplusCount() {
-//     console.log("googleplusCount");
-//     $.getJSON(QI.globals.base_url+"ajax/googleplusCount", function(data) {
-//         $(".badge-ios-gp").text(data);
-//     });
-// }
-
 // FIX: show more button hides behind footer on ipads
 // function fixFooter(){
 //     // console.log("fixFooter");

@@ -1,0 +1,31 @@
+SonarQube plugins:
+  - SonarPython 1.10.0.2131 (python)
+  - SonarCSS 1.0.2.611 (cssfamily)
+  - JaCoCo 1.0.1.143 (jacoco)
+  - SonarGo 1.1.0.1612 (go)
+  - SonarKotlin 1.2.1.2009 (kotlin)
+  - Svn 1.9.0.1295 (scmsvn)
+  - SonarJS 5.0.0.6962 (javascript)
+  - SonarRuby 1.2.1.2009 (ruby)
+  - SonarC# 7.7.0.7192 (csharp)
+  - SonarJava 5.8.0.15699 (java)
+  - LDAP 2.2.0.608 (ldap)
+  - Git 1.6.0.1349 (scmgit)
+  - SonarFlex 2.4.0.1222 (flex)
+  - SonarXML 1.5.1.1452 (xml)
+  - SonarPHP 2.14.0.3569 (php)
+  - SonarTS 1.8.0.3332 (typescript)
+  - SonarVB 7.7.0.7192 (vbnet)
+Global properties:
+  - sonar.core.id=BF41A1F2-AWngW6T8mRDV_qViYi9q
+  - sonar.core.startTime=2019-04-02T19:25:06-0400
+Settings for module: quran_index
+  - sonar.host.url=http://localhost:9000
+  - sonar.login=******
+  - sonar.projectBaseDir=/Applications/MAMP/htdocs/quran_index/cdn-static-assets
+  - sonar.projectKey=quran_index
+  - sonar.scanner.app=ScannerCli
+  - sonar.scanner.appVersion=3.3.0.1492
+  - sonar.sourceEncoding=UTF-8
+  - sonar.sources=.
+  - sonar.working.directory=/Applications/MAMP/htdocs/quran_index/cdn-static-assets/.scannerwork
