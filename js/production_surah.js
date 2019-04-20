@@ -10479,8 +10479,8 @@ QI.helpers = {
 
     // create html table using
     makeHTMLTable: function(myArray, id) {
-        results = "<table id='" + id + "' border='0'><tr><td>";
-        arrlen = myArray.length;
+        var results = "<table id='" + id + "' border='0'><tr><td>";
+        var arrlen = myArray.length;
         for (var i = 10; i < arrlen; i++) { // we start from the next 10 surahs
             if (i == Math.ceil(arrlen / 2) + 10) {
                 results += "</td><td>";
@@ -13654,7 +13654,7 @@ String.prototype.ucfirst = function() {
             // KMZ EDIT TO ALLOW ALTERNATIVE SURAH TOKENS TO BE IGNORED
             return (suggestions.length === 1 && 
                 (suggestions[0].value.toLowerCase() === queryLowerCase
-                || suggestions[0].value.toLowerCase().replace(/^(Al|An|Az|Ar|Ad|At|As|Ash|Adh)?[-]?/i, '') === queryLowerCase.replace(/^(s(o?u|o)ra[th]?e?|سورة)\s/i, '')
+                || suggestions[0].value.toLowerCase().replace(/^(Al|An|Az|Ar|Ad|At|As|Ash|Adh)?[-]?/i, '') === queryLowerCase.replace(/^(s(o?u|o)ra[th]?e?|سور(ة|ه))\s/i, '')
                 || suggestions[0].value.toLowerCase() === queryLowerCase.replace(' ', '-')
                 || suggestions[0].value.toLowerCase().replace(/é|è|ê|ë/g, 'e') === queryLowerCase
                 || suggestions[0].value.toLowerCase().replace(/û/g, 'u') === queryLowerCase
@@ -13924,7 +13924,7 @@ String.prototype.ucfirst = function() {
                 value = that.el.val().toLowerCase(),
                 bestMatch = null;
 
-            value = value.replace(/^(so?ura[th]?|سورة)\s/i, ''); // kmz add sura in account
+            value = value.replace(/^(s(o?u|o)ra[th]?e?|سور(ة|ه))\s/i, ''); // kmz add sura in account
 
             if (!value) {
                 return;
@@ -14788,7 +14788,7 @@ QI.main = {
  *
  */
 var VKI_attach, VKI_close;
-initArKeyboard = function() {
+var initArKeyboard = function() {
   var self = this;
 
   this.VKI_version = "1.49";
@@ -15116,8 +15116,9 @@ initArKeyboard = function() {
     return false;
   }, false);
 
-  if (!this.VKI_layout[this.VKI_kt])
-    return alert('No keyboard named "' + this.VKI_kt + '"');
+  // if (!this.VKI_layout[this.VKI_kt]) {
+  //   console.log('No keyboard named "' + this.VKI_kt + '"');
+  // }
 
   this.VKI_langCode = {};
   var thead = document.createElement('thead');
@@ -15144,7 +15145,7 @@ initArKeyboard = function() {
             kbSelect.appendChild(document.createTextNode(this.VKI_isIElt8 ? " \u2193" : " \u25be"));
             kbSelect.langCount = 0;
           var ol = document.createElement('ol');
-            for (ktype in this.VKI_layout) {
+            for (var ktype in this.VKI_layout) {
               if (typeof this.VKI_layout[ktype] == "object") {
                 if (!this.VKI_layout[ktype].lang) this.VKI_layout[ktype].lang = [];
                 for (var x = 0, y=this.VKI_layout[ktype].lang.length; x < y; x++)
@@ -15167,7 +15168,7 @@ initArKeyboard = function() {
             } kbSelect.appendChild(ol);
           if (kbSelect.langCount > 1) th.appendChild(kbSelect);
         this.VKI_langCode.index = [];
-        for (prop in this.VKI_langCode)
+        for (var prop in this.VKI_langCode)
           if (prop != "index" && typeof this.VKI_langCode[prop] == "string")
             this.VKI_langCode.index.push(prop);
         this.VKI_langCode.index.sort();
@@ -15762,7 +15763,7 @@ initArKeyboard = function() {
  * License: MIT
  * Homepage: http://cameronspear.com/blog/bootstrap-dropdown-on-hover-plugin/
  */
-;(function ($, window, undefined) {
+;(function ($, window, undef) {
     // outside the scope of the jQuery plugin to
     // keep track of all dropdowns
     var $allDropdowns = $();
@@ -18309,6 +18310,7 @@ $(window).on('load', function() {
             });
             $("[data-toggle='popover']").on('shown.bs.popover', function (e) {
                 $(".btn-tafsir-options").on('click', function(index) { //TAFSIR BUTTONS
+                    var info = "";
                     index %= 5; // fix because when opening a second popover, tafsir button indexes goes to 10 instead of staying 5 and therefore, index should stay as max the total number of tafsir buttons
                     switch(index) {
                         case 0: // play/pause
@@ -18473,8 +18475,9 @@ function map (arr, callback) {
 	}
 
 	var	r = [],
-		i;
-	for (i=0,j=arr.length; i<j; i++) {
+		i,
+		j=arr.length;
+	for (i=0; i<j; i++) {
 		r.push(callback(arr[i]));
 	}
 
@@ -18563,8 +18566,8 @@ function loadFile (file, callback, timeout) {
 		b = a[ a[1] ? 1 : 0 ].split('||');
 		self.id = a[1] ? a[0] : b[0];
 		self.alternates = alternates;
-
-		for (a=0,a1=b.length; a<a1; a++) {
+		var a1=b.length
+		for (a=0,a1; a<a1; a++) {
 			c = b[a].split('.');
 			c = c[c.length - 1].toLowerCase();
 
@@ -18932,9 +18935,9 @@ return html5Preloader;
 							spl = str.split(' ');
 							if ((spl.length > 1) && ($.inArray(spl[0], opts.prefixes) > -1)) {
 								firstChar = spl[1].charAt(0);
-								secondChar = spl[1].charAt(1);
-								thirdChar = spl[1].charAt(2);
-								subtChar = firstChar;
+								var secondChar = spl[1].charAt(1);
+								var thirdChar = spl[1].charAt(2);
+								var subtChar = firstChar;
 								addLetterClass(firstChar, secondChar, thirdChar, subtChar, $this, true);
 							}
 						}
@@ -23696,7 +23699,7 @@ module.exports = exports["default"];
             plugin.settings.lang = QI.globals.resultData.lang.langReciter;
 
             // Get params
-            isRtl = plugin.settings.isRtl = _isLang_RTL(plugin.settings.lang);
+            var isRtl = plugin.settings.isRtl = _isLang_RTL(plugin.settings.lang);
 
             // CSS for sourat name and aya container (used for marking new ayat loaded using more button)
             var css = "";
@@ -23722,9 +23725,8 @@ module.exports = exports["default"];
             var AyaObject = QI.globals.resultData.verses_text;
 
             // nb of tickets to show depending on show more
-            if(loadmore === undefined){
-                endIndex = (plugin.settings.nbAyat > QI.globals.resultData.total) ? AyaObject.length : plugin.settings.nbAyat;
-            }else{
+            var endIndex = (plugin.settings.nbAyat > QI.globals.resultData.total) ? AyaObject.length : plugin.settings.nbAyat;
+            if(loadmore !== undefined){
                 var nb_present_elems = $(".aya_container").length;
                 endIndex = (nb_present_elems + loadmore > QI.globals.resultData.total) ? AyaObject.length : plugin.settings.nbAyat;
             }
@@ -23774,10 +23776,10 @@ module.exports = exports["default"];
                 }
 
                 if(AyaObject[i].multiple !== undefined){
-                    for(ii=0,j=AyaObject[i].multiple.length;ii<j;ii++){
+                    for(var ii=0, j=AyaObject[i].multiple.length; ii<j; ++ii){
 
                         // check if aya > 10 to arrange css of aya number circle
-                        versenb = AyaObject[i].multiple[ii].ayah;
+                        var versenb = AyaObject[i].multiple[ii].ayah;
                         if (versenb > 9){
                             ayaNb_css = "doubledigit_aya";
                             // if(QI.globals.isIos)
@@ -23906,7 +23908,7 @@ module.exports = exports["default"];
         /*>>>> PRIVATE METHODS <<<<<*/
 
         // Set reciter
-        _setReciter = function (reciter) {
+        var _setReciter = function (reciter) {
             // plugin.debug("setReciter");
             var srcLink = $("#"+reciter).attr("data-src") === "qi" ? plugin.settings.URL_QI_VERSES : plugin.settings.URL_EVERYAYAH;
             var url = $("#"+reciter).attr("data-url");
@@ -24182,10 +24184,11 @@ module.exports = exports["default"];
 
         // switch Divs order
         var _switchDivsOrder = function(classname) {
-            var parentLength = document.getElementsByClassName(classname).length;
+            var element = document.getElementsByClassName(classname);
+            var parentLength = element.length;
             for (var j = 0; j < parentLength; j++) {
-                var parent = document.getElementsByClassName(classname)[j];
-                divs = parent.children,
+                var parent = element[j];
+                var divs = parent.children,
                     i = divs.length - 1;
                 for (; i--;) {
                     parent.appendChild(divs[i])
@@ -24324,7 +24327,7 @@ QI.functions = {
 
         // check if another language was chosen before submitting
         if (!params.lang) {
-            lang = $(".dropdown-lang").attr("data-selected-lang");
+            params.lang = $(".dropdown-lang").attr("data-selected-lang");
         }
 
         // console.log(JSON.stringify(params, null, 4));
@@ -24451,15 +24454,18 @@ QI.functions = {
             callback = $("#container").data("Ayat").showAllVerses;
         }
 
-        var lang1 = lang.split("."); // fr.hamidullah becomes fr
-        if (lang === "quran-simple"){
-            lang1[0] = "ar";
+        var langCode = "ar";
+        if(lang !== undefined) {
+            langCode = lang.split("."); // fr.hamidullah becomes fr
+            if (lang === "quran-simple"){
+                langCode[0] = "ar";
+            }
         }
 
         $.ajax({
             type: "POST",
             url: QI.globals.base_url + "verses",
-            data: {term: val, lang: lang1[0], reciter: reciter, count: count, nbAyatUser: nbAyatUser, QIT: $(".qi-hash").val()},
+            data: {term: val, lang: langCode[0], reciter: reciter, count: count, nbAyatUser: nbAyatUser, QIT: $(".qi-hash").val()},
             beforeSend: function(xhr){
                 QI.functions.preloader(0);
             },
@@ -24496,18 +24502,16 @@ QI.functions = {
     // get search term via URI
     getUrl: function(url) {
 
-        console.log("getUrl");
-
+        console.log("getUrl",url);
         // set user data such as lang, reciter, font size and # ayat
         this.setuserData();
 
         // var parser = document.createElement('a');
         // parser.href = url;
-        console.log("getUrl",url);
         // if (parser.search) {
             var pathArray = window.location.pathname.split( '/' );
             // term_link = parser.search.replace(/(\?q=)/g, "");
-            term_link = decodeURI(pathArray[pathArray.length-1]);
+            var term_link = decodeURI(pathArray[pathArray.length-1]);
 
             console.log("term_link",term_link);
 
@@ -24813,9 +24817,9 @@ QI.functions = {
         var regx = new RegExp('^' + regx_c + sep_c + regx_v1 + regx_v2 + '$');
 
         // split by chp & verse
-        arr = term.split(sep_c);
-        c = arr[0].trim().replace(zr, '');
-        v = (arr[1] !== undefined) ? arr[1].trim().replace(zr, '') : "1";
+        var arr = term.split(sep_c);
+        var c = arr[0].trim().replace(zr, '');
+        var v = (arr[1] !== undefined) ? arr[1].trim().replace(zr, '') : "1";
         
         // check if chp:verse inside boundaries
         if(c < cv_min || c > c_max || v < cv_min || v > v_max)
@@ -24824,8 +24828,8 @@ QI.functions = {
         // check if verses are composites
         if(v.indexOf(sep_v) !== -1){
             arr = v.split(sep_v);
-            v1 = parseInt(arr[0], 10);
-            v2 = parseInt(arr[1], 10);
+            var v1 = parseInt(arr[0], 10);
+            var v2 = parseInt(arr[1], 10);
         
             // check if v1 & v2 inside boundaries
             if(v2 < v1){
@@ -24834,7 +24838,7 @@ QI.functions = {
         }
         
         // check if regex matches chp:verse
-        data = c + sep_c + v;
+        var data = c + sep_c + v;
         if(data.match(regx)){
             return true;
         }
@@ -25267,7 +25271,7 @@ QI.events = {
                 // check if search term contains chapter:verses combination
                 var isTermWord = term.match(new RegExp('[a-zA-Z\u0621-\u064A]'));
                 if(!isTermWord && QI.functions.termHasCombinationChapterVerses(term)){
-                    url = term.replace(/\:/g, '/').replace(/\s+/g, "");
+                    var url = term.replace(/\:/g, '/').replace(/\s+/g, "");
                     window.location.href = QI.globals.base_url + "surah/" + url;
                     return;
                 }
@@ -25381,7 +25385,7 @@ QI.events = {
             var filter = $(this).val(), count = 0;
 
             // ignore c cedille and e accents when searching in french
-            filter2 = filter.replace(/c/gi,'[cçC]')
+            var filter2 = filter.replace(/c/gi,'[cçC]')
                             .replace(/e/gi,'[eéèEÉÈ]')
                             .replace(/i/gi,'[iïIÏ]');
 
@@ -25892,7 +25896,7 @@ QI.fixes = {
 // Functions
 function secondsTimeSpanToMMSS(seconds) {
     var hours = Math.floor(seconds / 3600);
-    minutes = Math.floor(seconds / 60);
+    var minutes = Math.floor(seconds / 60);
     seconds -= minutes * 60;
     minutes -= hours * 60;
     seconds = Math.round(seconds);
@@ -25982,8 +25986,8 @@ function scrollToVerse(nb) {
 // }
 
 function highlightAya(currentTime, direction) {
-    currentTime_ms = currentTime * 1000;
-    j = (sessionStorage.audioSurahPlayingAyaNb == undefined) ? 0 : sessionStorage.audioSurahPlayingAyaNb;
+    var currentTime_ms = currentTime * 1000;
+    var j = (sessionStorage.audioSurahPlayingAyaNb == undefined) ? 0 : sessionStorage.audioSurahPlayingAyaNb;
     if(direction=='left'){
         for (j; j > 0; j--) {
             if (timings[j] <= currentTime_ms) {
@@ -26077,9 +26081,9 @@ $(document).ready(function() {
             if(!window.location.hash && QI.globals.surahScroll && ayaHighlighted != currentSessionStorageAyaNb){
 
                 // if url is like qi/surah/2/34-50, then scroll to verse     34
-                surahUrl = document.location.pathname.split("/");
+                var surahUrl = document.location.pathname.split("/");
                 if(surahUrl[3] !== undefined && surahUrl[3] !== "") {
-                    urlLastSegment = surahUrl.pop().split("-");
+                    var urlLastSegment = surahUrl.pop().split("-");
                     urlLastSegment[0] = parseInt(urlLastSegment[0]);
                     urlLastSegment[1] = parseInt(urlLastSegment[1]);
                     currentSessionStorageAyaNb = typeof(urlLastSegment[0]) !== "number" ? currentSessionStorageAyaNb : parseInt(urlLastSegment[0]);
@@ -26167,7 +26171,7 @@ $(document).ready(function() {
 
         // make audio boundaries in case sliding outside permitted range
         var maxAudio = parseInt(e.target.getAttribute('max'));
-        position = (clientX - e.target.offsetLeft) / e.target.clientWidth * maxAudio;
+        var position = (clientX - e.target.offsetLeft) / e.target.clientWidth * maxAudio;
         position = (position < 0) ? 0 : (position > maxAudio) ? maxAudio : position;
 
         // efficient way to check if position is NaN because when audio is being loaded, no audio time is available yet
@@ -26230,7 +26234,7 @@ QI.functions.handlePopovers();
 // activate clipboard for single verses to copy verse and tafsir
 new ClipboardJS('.btn-copy', {
     text: function(trigger) {
-        surahAyaNb = trigger.getAttribute('data-clipboard');
+        var surahAyaNb = trigger.getAttribute('data-clipboard');
         return $("#aya_" + surahAyaNb).text() + "\n\n" + $("#tafsir_" + surahAyaNb).text();
     }
 });
@@ -26347,12 +26351,12 @@ $(document).on('click', '.btn-zoom', function(){
         zoomValue = -1;
     }
     $(".tafsir-text").css("fontSize", function(i, value) {
-        fontSizeValue = parseInt(value);
+        var fontSizeValue = parseInt(value);
         if(fontSizeValue <= zoomMin)
             fontSizeValue = zoomMin;
         if(fontSizeValue >= zoomMax)
             fontSizeValue = zoomMax;
-        newFontSizeValue = fontSizeValue + zoomValue
+        var newFontSizeValue = fontSizeValue + zoomValue
         QI.functions.localData("u_fontSizeTafsir", newFontSizeValue);
         return newFontSizeValue;
     });
