@@ -24062,7 +24062,7 @@ module.exports = exports["default"];
                 // ayatToPlay = params.ayaFrom + ", " + params.ayaTo + ", 1";
                 ayatToPlay = params.ayaFrom + "," + params.ayaTo;
                 ayaContent = ayaContent.replace(/<span>|<\/span>|<span style=\'\'>|<span class=\'doubledigit_aya\'>/gm, " "); // remove spans
-                if (plugin.settings.lang === "quran-simple" || isRtl){
+                if (plugin.settings.lang === "quran-simple" || plugin.settings.isRtl){
                     ayaContent = ayaContent.replace(/(\d)/g, "$1\n"); // add new lines b4 #s
                 }
                 else{
