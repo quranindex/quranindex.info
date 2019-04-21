@@ -23578,7 +23578,7 @@ module.exports = exports["default"];
             }
 
             // Get Ayat if theme exist
-            QI.functions.getTermVerses(plugin.settings.theme, plugin.settings.lang, plugin.settings.reciter, plugin.settings.nbAyat + $(".aya_container").length, plugin.showAllVerses);
+            QI.functions.getTermVerses(plugin.settings.theme, plugin.settings.lang, plugin.settings.reciter, $(".aya_container").length, plugin.showAllVerses);
         };
 
         /*>>>> PUBLIC METHODS <<<<<*/
@@ -23724,14 +23724,17 @@ module.exports = exports["default"];
             // array of objects to hold current processed aya info
             var AyaObject = QI.globals.resultData.verses_text;
 
-            // nb of tickets to show depending on show more
-            var endIndex = (plugin.settings.nbAyat > QI.globals.resultData.total) ? AyaObject.length : plugin.settings.nbAyat;
-            if(loadmore !== undefined){
-                var nb_present_elems = $(".aya_container").length;
-                endIndex = (nb_present_elems + loadmore > QI.globals.resultData.total) ? AyaObject.length : plugin.settings.nbAyat;
-            }
+            var endIndex = AyaObject.length;
 
-            if (loadmore >= QI.globals.resultData.total){
+            // nb of tickets to show depending on show more
+            // var endIndex = (plugin.settings.nbAyat > QI.globals.resultData.total) ? AyaObject.length : plugin.settings.nbAyat;
+            // if(loadmore !== undefined){
+            //     var nb_present_elems = $(".aya_container").length;
+            //     endIndex = (nb_present_elems + loadmore > QI.globals.resultData.total) ? AyaObject.length : plugin.settings.nbAyat;
+            // }
+
+            // if (loadmore >= QI.globals.resultData.total){
+            if (plugin.settings.nbAyat >= QI.globals.resultData.total - loadmore){
                 $("#jumbo-footer").hide();
                 $("#show-more").fadeOut(1000);
             }
@@ -24442,15 +24445,15 @@ QI.functions = {
     },
 
     // TERMS: get verses
-    getTermVerses: function(val, lang, reciter, count, callback) {
+    getTermVerses: function(val, lang, reciter, offset, callback) {
 
         // if no args are given, then assume it is a load more case
-        var nbAyatUser = ($("#ayat_nbayat").find('input')!=undefined) ? parseInt($("#ayat_nbayat").find('input').val()) : parseInt(QI.functions.localData('u_nbayat'));
-        if(val==undefined && lang==undefined && reciter==undefined && count==undefined && callback==undefined){
+        var total = ($("#ayat_nbayat").find('input')!=undefined) ? parseInt($("#ayat_nbayat").find('input').val()) : parseInt(QI.functions.localData('u_nbayat'));
+        if(val==undefined && lang==undefined && reciter==undefined && offset==undefined && callback==undefined){
             val = $("#container").data("Ayat").settings.theme;
             lang = $("#container").data("Ayat").settings.lang;
             reciter = $("#container").data("Ayat").settings.reciter;
-            count = $(".aya_container").length + $("#container").data("Ayat").settings.nbAyat;
+            offset = $(".aya_container").length; // + $("#container").data("Ayat").settings.nbAyat;
             callback = $("#container").data("Ayat").showAllVerses;
         }
 
@@ -24465,7 +24468,7 @@ QI.functions = {
         $.ajax({
             type: "POST",
             url: QI.globals.base_url + "verses",
-            data: {term: val, lang: langCode[0], reciter: reciter, count: count, nbAyatUser: nbAyatUser, QIT: $(".qi-hash").val()},
+            data: {term: val, lang: langCode[0], reciter: reciter, offset: offset, total: total, QIT: $(".qi-hash").val()},
             beforeSend: function(xhr){
                 QI.functions.preloader(0);
             },
@@ -24490,7 +24493,7 @@ QI.functions = {
                 }
                 else {
                     QI.globals.resultData = data;
-                    callback(count);
+                    callback(offset);
                     $(".jumbotron > *").not("#container, #jumbo-footer").remove();
                     $('[data-toggle="popover"]').popover();
                 }
