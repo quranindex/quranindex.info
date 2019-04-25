@@ -23484,7 +23484,10 @@ module.exports = exports["default"];
                     }
                     if(QI.globals.resultData.ar !== undefined) {
                         elementsToHighlight.push(QI.globals.resultData.ar)
-                        // elementsToHighlight.push(QI.globals.resultData.ar.replace(/^ال/,""))
+                        // remove alif lam at beginning only if search is from topic table
+                        if(!QI.globals.resultData.text_search) {
+                            elementsToHighlight.push(QI.globals.resultData.ar.replace(/^ال/,""))
+                        }
                     }
 
                     // highlights if they exist and remove duplicates
