@@ -51,7 +51,7 @@ h6,
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-.navigation-list a:not(.hi-icon), .well-sm a:not(.key,.hi-icon,.social-big-icon) {
+.navigation-list a:not(.hi-icon), .well-sm a:not(.key):not(.hi-icon):not(.social-big-icon) {
   font-size:16px;
 }
 

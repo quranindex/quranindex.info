@@ -23485,9 +23485,9 @@ module.exports = exports["default"];
                     if(QI.globals.resultData.ar !== undefined) {
                         elementsToHighlight.push(QI.globals.resultData.ar)
                         // remove alif lam at beginning only if search is from topic table
-                        if(!QI.globals.resultData.text_search) {
-                            elementsToHighlight.push(QI.globals.resultData.ar.replace(/^ال/,""))
-                        }
+                        // if(!QI.globals.resultData.text_search) {
+                        //     elementsToHighlight.push(QI.globals.resultData.ar.replace(/^ال/,""))
+                        // }
                     }
 
                     // highlights if they exist and remove duplicates
@@ -23505,7 +23505,7 @@ module.exports = exports["default"];
 
                     $(".aya-text").mark(elementsToHighlight, {
                         "className": "highlight",
-                        "separateWordSearch":  !/\s|\%20/g.test(plugin.settings.theme),
+                        "separateWordSearch": !/\s|\%20/g.test(plugin.settings.theme),
                         "accuracy": "complementary",
                         // "ignoreJoiners": true,
                         // debug: true,
@@ -23515,7 +23515,7 @@ module.exports = exports["default"];
                         //     searched_term: $("#search").data("highlights").split(",")
                         // },
                         // separateWordSearch: false,
-                        "ignorePunctuation": ["'ِ', 'ُ', 'ٓ', 'ٰ', 'ْ', 'ٌ', 'ٍ', 'ً', 'ّ', 'َ'"],
+                        "ignorePunctuation": ['ِ', 'ُ', 'ٓ', 'ٰ', 'ْ', 'ٌ', 'ٍ', 'ً', 'ّ', 'َ'],
                         // "filter": function(node, term, totalCounter, counter){
                         //     if($("#search").data("highlights").includes(term)){
                         //         return false;
