@@ -18206,14 +18206,14 @@ $(window).on('load', function() {
         /*****************/
         /** TRANSLATION LINKS **/
         /*****************/
-        $('.list-lang').on('click', 'a', function() {
+        $('.drop-lang').on('click', '.list-lang', function() {
             ga('send', 'event', 'translation', $(this).attr('data-lang'), location.pathname);
         });
 
         /*****************/
         /** RECITER LINKS **/
         /*****************/
-        $('.list-reciter').on('click', 'a', function() {
+        $('.drop-reciter').on('click', '.list-reciter', function() {
             ga('send', 'event', 'reciter', $(this).attr('title'), location.pathname);
         });
 
@@ -18282,6 +18282,37 @@ $(window).on('load', function() {
         /*****************/
         $("#references-list").on('click', 'a', function() {
             ga('send', 'event', 'outbound', $(this).attr('href'), location.pathname);
+        });
+
+        /*****************/
+        /** BUTTONS **/
+        /*****************/
+        $(".menu-toggle").on('click', function() { //MENU BUTTON
+            ga('send', 'event', 'button_menu', $(this).attr('data-placement'), location.pathname);
+        });
+        $(".weblang-toggle").on('click', function() { //LANG BUTTON
+            ga('send', 'event', 'button_lang', '', location.pathname);
+        });
+        $("#arkeyb").on('click', function() { //KEYBOARD BUTTON
+            $(this).on('click', function() {
+                ga('send', 'event', 'button_keyboard', '', location.pathname);
+            });
+        });
+        $("#btn-search-topic").on('click', function() { //SEARCH BUTTON
+            ga('send', 'event', 'button_search', '', location.pathname);
+        });
+        $("#show-more").on('click', function() { //SHOW MORE RESULTS BUTTON
+            var data = {
+                'containerLength': $(".aya_container").length,
+                'search': $("#search").val(),
+                'reciter': $(".dropdown-reciter").attr("data-selected-reciter"),
+                'translation': $(".dropdown-lang").attr("data-selected-lang"),
+                'lang': i18n.lng()
+            }
+            ga('send', 'event', 'button_showmore', JSON.stringify(data), location.pathname);
+        });
+        $("#alphabetTerms-nav").on('click', ' .key', function() { //ALPHA KEYS BUTTONS
+            ga('send', 'event', 'button_alphakeys', $(this).text(), location.pathname);
         });
 
         /*****************/
@@ -18355,37 +18386,6 @@ $(window).on('load', function() {
                     ga('send', 'event', 'surah_name_alert', $(this).attr('href'), location.pathname);
             });
         }
-
-        /*****************/
-        /** BUTTONS **/
-        /*****************/
-        $(".menu-toggle").on('click', function() { //MENU BUTTON
-            ga('send', 'event', 'button_menu', $(this).attr('data-placement'), location.pathname);
-        });
-        $(".weblang-toggle").on('click', function() { //LANG BUTTON
-            ga('send', 'event', 'button_lang', '', location.pathname);
-        });
-        $("#arkeyb").on('click', function() { //KEYBOARD BUTTON
-            $(this).on('click', function() {
-                ga('send', 'event', 'button_keyboard', '', location.pathname);
-            });
-        });
-        $("#btn-search-topic").on('click', function() { //SEARCH BUTTON
-            ga('send', 'event', 'button_search', '', location.pathname);
-        });
-        $("#show-more").on('click', function() { //SHOW MORE RESULTS BUTTON
-        	var data = {
-        		'containerLength': $(".aya_container").length,
-        		'search': $("#search").val(),
-        		'reciter': $(".dropdown-reciter").attr("data-selected-reciter"),
-        		'translation': $(".dropdown-lang").attr("data-selected-lang"),
-        		'lang': i18n.lng()
-        	}
-            ga('send', 'event', 'button_showmore', JSON.stringify(data), location.pathname);
-        });
-        $("#alphabetTerms-nav").on('click', ' .key', function() { //ALPHA KEYS BUTTONS
-            ga('send', 'event', 'button_alphakeys', $(this).text(), location.pathname);
-        });
 });
 var html5Preloader = (function () {
 
@@ -23914,9 +23914,9 @@ module.exports = exports["default"];
         /*>>>> PRIVATE METHODS <<<<<*/
 
         // Set reciter
+        // BADFIX: the second check with startWith should be in the DB
         var _setReciter = function (reciter) {
-            // plugin.debug("setReciter");
-            var srcLink = $("#"+reciter).attr("data-src") === "qi" ? plugin.settings.URL_QI_VERSES : plugin.settings.URL_EVERYAYAH;
+            var srcLink = $("#"+reciter).attr("data-src") === "qi" && !$("#"+reciter).attr("data-url").startsWith("translations/") ? plugin.settings.URL_QI_VERSES : plugin.settings.URL_EVERYAYAH;
             var url = $("#"+reciter).attr("data-url");
             return srcLink + url;
         };
@@ -24709,14 +24709,14 @@ QI.functions = {
         }
         else{
             if(!QI.functions.localData("u_lang")){
-                var lang = $(".list-lang.selected").find("a").attr("data-lang");
+                var lang = $(".list-lang.selected").attr("data-lang");
                 $(".dropdown-lang").attr("data-selected-lang", lang);
                 QI.functions.localData("u_lang", lang);
             }
             else{
                 $(".dropdown-lang").attr("data-selected-lang", QI.functions.localData("u_lang"));
                 $(".list-lang").removeClass("selected");
-                $("a[data-lang='"+QI.functions.localData("u_lang")+"']").parent().addClass("selected");
+                $("div[data-lang='"+QI.functions.localData("u_lang")+"']").addClass("selected");
             }
 
             if(!QI.functions.localData("u_reciter")){
@@ -25427,7 +25427,7 @@ QI.events = {
                 $(this).toggleClass('selected').siblings().removeClass('selected');
 
                 // process lang
-                $(".dropdown-lang").attr("data-selected-lang", $(this).find('a').attr("data-lang"));
+                $(".dropdown-lang").attr("data-selected-lang", $(this).attr("data-lang"));
 
                 // set user settings
                 QI.functions.localData("u_lang", $(".dropdown-lang").attr("data-selected-lang"));
