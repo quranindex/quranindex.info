@@ -13132,8 +13132,8 @@ String.prototype.ucfirst = function() {
 
 })(typeof exports === 'undefined' ? window : exports);
 /**
-*  Ajax Autocomplete for jQuery, version 1.4.1
-*  (c) 2015 Tomas Kirda
+*  Ajax Autocomplete for jQuery, version 1.4.10
+*  (c) 2017 Tomas Kirda
 *
 *  Ajax Autocomplete for jQuery is freely distributable under the terms of an MIT-style license.
 *  For details, see the web site: https://github.com/devbridge/jQuery-Autocomplete
@@ -13200,9 +13200,9 @@ String.prototype.ucfirst = function() {
             UP: 38,
             RIGHT: 39,
             DOWN: 40
-        };
+        },
 
-        var noop = $.noop;
+        noop = $.noop;
 
     function Autocomplete(el, options) {
         var that = this;
@@ -13221,7 +13221,7 @@ String.prototype.ucfirst = function() {
         that.isLocal = false;
         that.suggestionsContainer = null;
         that.noSuggestionsContainer = null;
-        that.options = $.extend({}, Autocomplete.defaults, options);
+        that.options = $.extend(true, {}, Autocomplete.defaults, options);
         that.classes = {
             selected: 'autocomplete-selected',
             suggestion: 'autocomplete-suggestion'
@@ -13289,7 +13289,7 @@ String.prototype.ucfirst = function() {
         if (!currentValue) {
             return suggestion.value;
         }
-        
+
         var pattern = '(' + utils.escapeRegExChars(currentValue) + ')';
 
         return suggestion.value
@@ -13307,8 +13307,6 @@ String.prototype.ucfirst = function() {
 
     Autocomplete.prototype = {
 
-        killerFn: null,
-
         initialize: function () {
             var that = this,
                 suggestionSelector = '.' + that.classes.suggestion,
@@ -13316,15 +13314,7 @@ String.prototype.ucfirst = function() {
                 options = that.options,
                 container;
 
-            // Remove autocomplete attribute to prevent native suggestions:
             that.element.setAttribute('autocomplete', 'off');
-
-            that.killerFn = function (e) {
-                if (!$(e.target).closest('.' + that.options.containerClass).length) {
-                    that.killSuggestions();
-                    that.disableKillerFn();
-                }
-            };
 
             // html() deals with many types: htmlString or Element or Array or jQuery
             that.noSuggestionsContainer = $('<div class="autocomplete-no-suggestion"></div>')
@@ -13334,7 +13324,7 @@ String.prototype.ucfirst = function() {
 
             container = $(that.suggestionsContainer);
 
-            container.appendTo(options.appendTo);
+            container.appendTo(options.appendTo || 'body');
 
             // Only set width if it was provided:
             if (options.width !== 'auto') {
@@ -13388,15 +13378,22 @@ String.prototype.ucfirst = function() {
         },
 
         onBlur: function () {
-            var that = this;
+            var that = this,
+                options = that.options,
+                value = that.el.val(),
+                query = that.getQuery(value);
 
             // If user clicked on a suggestion, hide() will
             // be canceled, otherwise close suggestions
             that.blurTimeoutId = setTimeout(function () {
                 that.hide();
+
+                if (that.selection && that.currentValue !== query) {
+                    (options.onInvalidateSelection || $.noop).call(that.element);
+                }
             }, 200);
         },
-        
+
         abortAjax: function () {
             var that = this;
             if (that.currentRequest) {
@@ -13407,11 +13404,9 @@ String.prototype.ucfirst = function() {
 
         setOptions: function (suppliedOptions) {
             var that = this,
-                options = that.options;
+                options = $.extend({}, that.options, suppliedOptions);
 
-            this.options = $.extend({}, options, suppliedOptions);
-
-            that.isLocal = $.isArray(options.lookup);
+            that.isLocal = Array.isArray(options.lookup);
 
             if (that.isLocal) {
                 options.lookup = that.verifySuggestionsFormat(options.lookup);
@@ -13425,6 +13420,8 @@ String.prototype.ucfirst = function() {
                 'width': options.width + 'px',
                 'z-index': options.zIndex
             });
+
+            this.options = options;
         },
 
 
@@ -13496,6 +13493,7 @@ String.prototype.ucfirst = function() {
 
                 parentOffsetDiff = $container.offsetParent().offset();
                 styles.top -= parentOffsetDiff.top;
+                styles.top += containerParent.scrollTop;
                 styles.left -= parentOffsetDiff.left;
 
                 if (!that.visible){
@@ -13504,7 +13502,7 @@ String.prototype.ucfirst = function() {
             }
 
             if (that.options.width === 'auto') {
-                styles.width = that.el.outerWidth() + 'px';
+                styles.width = that.el.parent().outerWidth() + 'px';
             }
 
             $container.css(styles);
@@ -13616,6 +13614,11 @@ String.prototype.ucfirst = function() {
         },
 
         onValueChange: function () {
+            if (this.ignoreValueChange) {
+                this.ignoreValueChange = false;
+                return;
+            }
+
             var that = this,
                 options = that.options,
                 value = that.el.val();
@@ -13735,7 +13738,7 @@ String.prototype.ucfirst = function() {
                 response = that.cachedResponse[cacheKey];
             }
 
-            if (response && $.isArray(response.suggestions)) {
+            if (response && Array.isArray(response.suggestions)) {
                 that.suggestions = response.suggestions;
                 that.suggest();
                 options.onSearchComplete.call(that.element, q, response.suggestions);
@@ -13887,7 +13890,7 @@ String.prototype.ucfirst = function() {
             noSuggestionsContainer.detach();
 
             // clean suggestions if any
-            container.empty(); 
+            container.empty();
             container.append(noSuggestionsContainer);
 
             if ($.isFunction(beforeRender)) {
@@ -13910,7 +13913,7 @@ String.prototype.ucfirst = function() {
             // because if instance was created before input had width, it will be zero.
             // Also it adjusts if input width has changed.
             if (options.width === 'auto') {
-                width = that.el.outerWidth();
+                width = that.el.parent().outerWidth(); // kmz: use parent instead because #search is smaller than actual container which has close, keyboard and search buttons
                 container.css('width', width > 0 ? width : 300);
             } else if(options.width === 'flex') {
                 // Trust the source! Unset the width property so it will be the max length
@@ -14039,8 +14042,9 @@ String.prototype.ucfirst = function() {
             }
 
             if (that.selectedIndex === 0) {
-                $(that.suggestionsContainer).children().first().removeClass(that.classes.selected);
+                $(that.suggestionsContainer).children('.' + that.classes.suggestion).first().removeClass(that.classes.selected);
                 that.selectedIndex = -1;
+                that.ignoreValueChange = false;
                 that.el.val(that.currentValue);
                 that.findBestHint();
                 return;
@@ -14083,6 +14087,11 @@ String.prototype.ucfirst = function() {
             }
 
             if (!that.options.preserveInput) {
+                // During onBlur event, browser will trigger "change" event,
+                // because value has changed, to avoid side effect ignore,
+                // that event, so that correct suggestion can be selected
+                // when clicking on suggestion with a mouse
+                that.ignoreValueChange = true;
                 that.el.val(that.getValue(that.suggestions[index].value));
             }
             that.signalHint(null);
@@ -14131,7 +14140,6 @@ String.prototype.ucfirst = function() {
         dispose: function () {
             var that = this;
             that.el.off('.autocomplete').removeData('autocomplete');
-            that.disableKillerFn();
             $(window).off('resize.autocomplete', that.fixPositionCapture);
             $(that.suggestionsContainer).remove();
         }
