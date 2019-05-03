@@ -14680,11 +14680,11 @@ QI.main = {
 			$(document).i18n();
 
 			// check if there are news
-			// if(QI.helpers.getCookie("hasNews0417") == "1" || QI.helpers.getCookie("hasNews0417") == ""){
-			// 	if($(".badge-ios-news").length > 0)
-		 //        	$(".badge-ios-news").css("display", "inline");
-		 //        QI.helpers.setCookie("hasNews0417", 1);
-		 //    }
+			if(QI.helpers.getCookie("hasNews0519") == "1" || QI.helpers.getCookie("hasNews0519") == ""){
+				if($(".badge-ios-news").length > 0)
+		        	$(".badge-ios-news").css("display", "inline");
+		        QI.helpers.setCookie("hasNews0519", 1);
+		    }
 
 		    // FIX: css IE input range for surah play audio
 		    if(QI.globals.isIE && QI.globals.pageType == 2){
@@ -25774,16 +25774,16 @@ QI.events = {
     },
 
 
-    // onFooterclick: function(){
-    //     // if user click on news link, then remove the nb of news badge notification
-    //     $(".news-link").on('click', function(){
-    //         if(QI.helpers.getCookie("hasNews0417") == "1"){
-    //             QI.helpers.setCookie("hasNews0417", 0);
-    //             if($(".badge-ios-news").length > 0)
-    //                 $(".badge-ios-news").remove();
-    //         }
-    //     });
-    // },
+    onFooterclick: function(){
+        // if user click on news link, then remove the nb of news badge notification
+        $(".news-link").on('click', function(){
+            if(QI.helpers.getCookie("hasNews0519") == "1"){
+                QI.helpers.setCookie("hasNews0519", 0);
+                if($(".badge-ios-news").length > 0)
+                    $(".badge-ios-news").remove();
+            }
+        });
+    },
 
     onClearButtonClick: function(){
         $(".btn-clear-reciter").on('click', function(){
