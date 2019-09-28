@@ -25228,7 +25228,7 @@ window.addEventListener('load', function(){
     QI.events.onDisplayOptionClick();
     QI.events.onThemeOptionClick();
     QI.events.onFontsizeOptionClick();
-    // QI.events.onFooterclick(); // activate on hasnews
+    QI.events.onFooterclick(); // activate on hasnews
     QI.events.onModalShow();
     QI.events.onArKeyboardClick();
     QI.events.onWeblangClick();
