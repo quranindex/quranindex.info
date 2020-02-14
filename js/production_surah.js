@@ -25213,7 +25213,7 @@ window.addEventListener('load', function(){
 
     // search
     if(!QI.globals.errorPage && QI.globals.pageType === 1){
-        QI.functions.getTerm(window.location.pathname.split("/").pop());
+        QI.functions.getTerm(location.href.match(/([^\/]*)\/*$/)[1]);
     }
 
     QI.functions.initAutocomplete();
