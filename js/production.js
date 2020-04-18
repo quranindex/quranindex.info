@@ -23750,6 +23750,10 @@ module.exports = exports["default"];
                 $("#show-more").fadeOut(1000);
             }
             else{
+                // show the number of verses to show
+                var showMoreText = i18n.t("jumbotron.showmore");
+                $("#show-more").find(".show-more-text").text(showMoreText + " (" + (plugin.settings.nbAyat + loadmore) + "/" + QI.globals.resultData.total + ")");
+
                 $("#jumbo-footer").show();
                 $("#show-more").fadeIn(1000);
             }
