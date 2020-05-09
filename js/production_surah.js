@@ -23418,7 +23418,7 @@ module.exports = exports["default"];
             didumeanTerm: 0,
             isRtl: 0,
             isSearch: 0,
-            URL_EVERYAYAH: "http://www.everyayah.com/data/",
+            URL_EVERYAYAH: "https://everyayah.com/data/",
             URL_QI_VERSES: "https://quranindex.info/audio/",
             // apiKey_globalquran: "4f4a071726fff08dd2699136ad9a0b80",
             // apiKey_yandex: "trnsl.1.1.20140311T124343Z.17f767f43215d6f7.ba09d74d29e7ec6adaf3527da6c714b100e982e8",
