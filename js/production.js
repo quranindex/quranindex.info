@@ -10416,7 +10416,7 @@ QI.globals = {
 	DEFAULT_QURAN_FR: "French-Quran.pdf",
 	DEFAULT_QURAN_AR: "Arabic-Quran.pdf",
 	changeTranslation: 0, // FIX: show loading bismillah gif when clicking on different translation
-	everyAyahUrl: 'http://www.everyayah.com/data/'
+	everyAyahUrl: 'https://everyayah.com/data/'
 };
 /* HELPERS */
 // replace accents for autocomplete
