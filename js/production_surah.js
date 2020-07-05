@@ -23873,7 +23873,7 @@ module.exports = exports["default"];
                     ayaContainer: rangeAyaOption
                 };
 
-                var completeSurahName = _getSouratName(chpnb) + ' ' + rangeAya;
+                var completeSurahName = _getSouratName(chpnb) + ' ' + chpnb + ':' + rangeAya;
 
                 var ayaTextStr = '<p class="aya-text">'+completeVerse+'</p>';
 
