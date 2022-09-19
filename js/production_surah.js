@@ -24638,7 +24638,7 @@ module.exports = exports["default"];
             if (plugin.settings.mailto && plugin.settings.twitter && plugin.settings.facebook) {
 
                 // var shareUrl = QI.globals.base_url + 'surah/' + souratLink;
-                var shareUrl = 'https://quranindex.info/surah/' + encodeURIComponent(souratLink);
+                var shareUrl = 'https://quranindex.info/surah/' + encodeURIComponent(souratLink) + '/' + ayaFrom;
                 var shareDesc = i18n.t('app.surah-description') + ' ' + encodeURIComponent(params.souratName) + ' ' + ayaFrom;
                 var shareSouratName = params.souratName.replace('\'','');
                 var sendtofriend = i18n.t('options.sendtofriend')
