@@ -11638,8 +11638,11 @@ String.prototype.ucfirst = function() {
         selectorAttr: 'data-i18n',
         debug: false,
     
-        resGetPath: ( (QI.globals.env === "prod") ? QI.globals.cdn_url : QI.globals.base_url ) + 'locales/__lng__/__ns__.json', // kamal
-        resPostPath: ( (QI.globals.env === "prod") ? QI.globals.cdn_url : QI.globals.base_url ) + 'locales/add/__lng__/__ns__',
+        // statically doesnt refresh these files, need to get them from QI domain instead
+        // resGetPath: ( (QI.globals.env === "prod") ? QI.globals.cdn_url : QI.globals.base_url ) + 'locales/__lng__/__ns__.json', // kamal
+        // resPostPath: ( (QI.globals.env === "prod") ? QI.globals.cdn_url : QI.globals.base_url ) + 'locales/add/__lng__/__ns__',
+        resGetPath: QI.globals.base_url + 'locales/__lng__/__ns__.json', // kamal
+        resPostPath: QI.globals.base_url + 'locales/add/__lng__/__ns__',
     
         getAsync: true,
         postAsync: true,
