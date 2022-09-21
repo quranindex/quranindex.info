@@ -24454,7 +24454,7 @@ module.exports = exports["default"];
             var surahsInfos = QI.globals.resultData.surahs.infos['s_'+nb];
             var result = Object.byString(surahsInfos, i18n.lng());
             var type = (QI.globals.resultData.surahs.infos['s_'+nb].type == 1) ?  i18n.t("options.details.madania") : i18n.t("options.details.makkia");
-            var info = i18n.t("options.details.type") + type + "\n" + i18n.t("options.details.order") + QI.globals.resultData.surahs.infos['s_'+nb].order + "\n" + i18n.t("options.details.nbverses") + QI.globals.resultData.surahs.infos['s_'+nb].nbverses + "\n" + i18n.t("options.details.nbwords") + QI.globals.resultData.surahs.infos['s_'+nb].nbwords;
+            var info = i18n.t("options.details.type") + type + "\n" + i18n.t("options.details.order") + QI.globals.resultData.surahs.infos['s_'+nb].order + "\n" + i18n.t("options.details.nbverses") + QI.globals.resultData.surahs.infos['s_'+nb].nbverses + "\n" + i18n.t("options.details.nbwords") + QI.globals.resultData.surahs.infos['s_'+nb].nbwords + "\n" + i18n.t("options.details.nbrukus") + QI.globals.resultData.surahs.infos['s_'+nb].nbrukus;
 
             return "<span class='label label-custom label-success'><a title='"+info+"' href='"+QI.globals.base_url+"surah/"+result.toLowerCase().replace("'","").replace(/\s/g,"-")+"'>" + result + "</a></span>";
         };
@@ -24617,6 +24617,7 @@ module.exports = exports["default"];
                     title: i18n.t("options.details.title"),
                     nbverses: i18n.t("options.details.nbverses"),
                     nbwords: i18n.t("options.details.nbwords"),
+                    nbrukus: i18n.t("options.details.nbrukus"),
                     order: i18n.t("options.details.order"),
                     type: i18n.t("options.details.type"),
                     tafsir: i18n.t("options.details.tafsir"),
@@ -24653,11 +24654,12 @@ module.exports = exports["default"];
                 var details_obj = {
                     nbverses : Object.byString(QI.globals.resultData.surahs.infos, 's_'+params.souratNb).nbverses,
                     nbwords : Object.byString(QI.globals.resultData.surahs.infos, 's_'+params.souratNb).nbwords,
+                    nbrukus : Object.byString(QI.globals.resultData.surahs.infos, 's_'+params.souratNb).nbrukus,
                     type : (Object.byString(QI.globals.resultData.surahs.infos, 's_'+params.souratNb).type == 1) ? langTerms.details.madania:langTerms.details.makkia,
                     tafsir : "<a title='" + langTerms.details.title + "' href='" + QI.globals.base_url + "surah/" + params.souratNb + "/" + ayaFrom + "'>" + langTerms.details.link + "<span class='glyphicon glyphicon-new-window'></span></a>",
                     reading : "<a title='" + langTerms.details.reading + params.souratName.replace('\'','') + "' href='" + QI.globals.base_url + "surah/" + souratLink + "'>" + langTerms.details.link + "<span class='glyphicon glyphicon-new-window'></span></a>"
                 };
-                var details_html = "<ul class='list-details'><li><span>" + langTerms.details.type + "<strong>"+details_obj.type+"</strong></span></li><li><span>" + langTerms.details.order + "<strong>"+params.souratNb+"</strong></span></li><li><span>" + langTerms.details.nbverses + "<strong>"+details_obj.nbverses+"</strong></span></li><li><span>" + langTerms.details.nbwords + "<strong>"+details_obj.nbwords+"</strong></span></li><li><span>"  + langTerms.details.tafsir + "<strong>"+details_obj.tafsir+"</strong></span></li><li><span>" + langTerms.details.reading + "<strong>"+details_obj.reading+"</strong></span></li></ul>";
+                var details_html = "<ul class='list-details'><li><span>" + langTerms.details.type + "<strong>"+details_obj.type+"</strong></span></li><li><span>" + langTerms.details.order + "<strong>"+params.souratNb+"</strong></span></li><li><span>" + langTerms.details.nbverses + "<strong>"+details_obj.nbverses+"</strong></span></li><li><span>" + langTerms.details.nbwords + "<strong>"+details_obj.nbwords+"</strong></span></li><li><span>" + langTerms.details.nbrukus + "<strong>"+details_obj.nbrukus+"</strong></span></li><li><span>" + langTerms.details.tafsir + "<strong>"+details_obj.tafsir+"</strong></span></li><li><span>" + langTerms.details.reading + "<strong>"+details_obj.reading+"</strong></span></li></ul>";
                 optionContainerStr += '<li><a title="'+langTerms.information+'" rel="nofollow" title="' + langTerms.details.title + '" class="popover-container" role="button" tabindex=0 id="popover-details-' + params.ayaContainer + '" data-container="body" data-toggle="popover" data-placement="top" data-content="'+details_html+'" data-html="true" data-trigger="focus"><div class="icon-container"><span class="icon-info icon" style="float:right"></span></div></a></li>';
             }
             if (plugin.settings.audio){
