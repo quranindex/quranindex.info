@@ -18706,11 +18706,11 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
 // http://www.gregreindel.com/google-analytics-tracking-added-automatically-jquery/
 $(window).on('load', function() {
 
-        if(QI.globals.env !== "prod")
-            return;
+        // if(QI.globals.env !== "prod")
+        //     return;
 
         // load google analytics
-        if(!window.dataLayer) {
+        // if(!window.dataLayer) {
             // (function(e,t,n,r,i,s,o){e["GoogleAnalyticsObject"]=i;e[i]=e[i]||function(){(e[i].q=e[i].q||[]).push(arguments)},e[i].l=1*new Date;s=t.createElement(n),o=t.getElementsByTagName(n)[0];s.async=1;s.src=r;o.parentNode.insertBefore(s,o)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");
             // gtag('create', 'UA-52330832-1', 'auto');
             // gtag("require","displayfeatures");
@@ -18729,7 +18729,7 @@ $(window).on('load', function() {
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'G-J8L1C042QH');
-        }
+        // }
 
         /*****************/
         /** TRANSLATION LINKS **/
