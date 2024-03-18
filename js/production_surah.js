@@ -18715,8 +18715,8 @@ $(window).on('load', function() {
             // gtag('create', 'UA-52330832-1', 'auto');
             // gtag("require","displayfeatures");
             // gtag("require","linkid","linkid.js");
-            // gtag('event', 'pageview');
-            function loadGoogleAnalytics(){
+            // dataLayer.push({'event': 'pageview');
+           function loadGoogleAnalytics(){
                 var ga = document.createElement('script'); 
                 ga.type = 'text/javascript'; 
                 ga.async = true;
@@ -18726,7 +18726,7 @@ $(window).on('load', function() {
             }
             loadGoogleAnalytics(); //Create the script  
             window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
+            // function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'G-J8L1C042QH');
         }
@@ -18735,99 +18735,99 @@ $(window).on('load', function() {
         /** TRANSLATION LINKS **/
         /*****************/
         $('.drop-lang').on('click', '.list-lang', function() {
-            gtag('event', 'translation', {'title': $(this).attr('data-lang'), 'path': location.pathname});
+            dataLayer.push({'event': 'translation', 'title': $(this).attr('data-lang'), 'path': location.pathname});
         });
 
         /*****************/
         /** RECITER LINKS **/
         /*****************/
         $('.drop-reciter').on('click', '.list-reciter', function() {
-            gtag('event', 'reciter', {'title': $(this).attr('title'), 'path': location.pathname});
+            dataLayer.push({'event': 'reciter', 'title': $(this).attr('title'), 'path': location.pathname});
         });
 
         /*****************/
         /** MODAL LINKS **/
         /*****************/
         // $("a[data-toggle='modal']").on('click', function() {
-        //         gtag('event', 'modal'{title: , $(this).attr('data-target'), 'path': location.pathname});
+        //         dataLayer.push({'event': 'modal'{ttle: , $(this).attr('data-target'), 'path': location.pathname});
         // });
 
         /*****************/
         /** SOCIAL PAGES LINKS **/
         /*****************/
         $(".footer-social").on('click', 'a', function() {
-            gtag('event', 'social_page', {'title': $(this).attr('title'), 'path': location.pathname});
+            dataLayer.push({'event': 'social_page', 'title': $(this).attr('title'), 'path': location.pathname});
         });
 
         /*****************/
         /** SOCIAL SHARE LINKS **/
         /*****************/
         $(".social-list").on('click', 'a', function() {
-                gtag('event', 'social_share', {'title': $(this).attr('title'), 'path': location.pathname});
+                dataLayer.push({'event': 'social_share', 'title': $(this).attr('title'), 'path': location.pathname});
         });
 
         /*****************/
         /** SETTINGS FOR DISPLAY, ORDER BY AND THEME **/
         /*****************/
         $(".dropdown-display li:not(.nav-header)").children().not(".inner-dropdown").on('click', function() {
-            gtag('event', 'setting', {'select': $(this).attr('data-select-display'), 'path': location.pathname});
+            dataLayer.push({'event': 'setting', 'select': $(this).attr('data-select-display'), 'path': location.pathname});
         });
         // FONT SIZE AND NB AYAT VIEW // TO FIX, ON CHANGE SHOULD UPDATE GA EVENT TOO
         // $(".bar").on('click', function() {
-        //     $(this).attr("o{title: nchange", $(this).attr('onchange') + ";gtag('event', 'setting', $(this).attr("id")+": "+ayat_fontsize_out.value, 'path': location.pathname});
+        //     $(this).attr("o{title: nchange", $(this).attr('onchange') + ";dataLayer.push({'event': 'setting', (this).attr("id")+": "+ayat_fontsize_out.value, 'path': location.pathname});
         // });
 
         /*****************/
         /** LANG LINKS **/
         /*****************/
         $(".dropdown-weblang").on('click', 'a', function() {
-                gtag('event', 'language', {'lang': $(this).attr('hreflang'), 'path': location.pathname});
+                dataLayer.push({'event': 'language', 'lang': $(this).attr('hreflang'), 'path': location.pathname});
         });
 
         /*****************/
         /** DOWNLOAD PDF LINKS **/
         /*****************/
         $(".pdf-list:not(.surah-list)").on('mouseover', "a[data-toggle='tooltip']", function() {
-                gtag('event', 'download', {'title': $(this).prev().attr("title"), 'path': location.pathname});
+                dataLayer.push({'event': 'download', 'title': $(this).prev().attr("title"), 'path': location.pathname});
         });
 
         /*****************/
         /** TOPICS LINKS **/
         /*****************/
         $("#alphabetTerms").on('click', 'a', function() {
-            gtag('event', 'topic', {'data': $(this).text(), 'path': location.pathname});
+            dataLayer.push({'event': 'topic', 'data': $(this).text(), 'path': location.pathname});
         });
 
         /*****************/
         /** SURAHS LINKS **/
         /*****************/
         $(".surah-list").on('mouseover', 'a.icon-info', function() {
-            gtag('event', 'surah', {'data': $(this).text(), 'path': location.pathname});
+            dataLayer.push({'event': 'surah', 'data': $(this).text(), 'path': location.pathname});
         });
 
         /*****************/
         /** EXTERNAL LINKS **/
         /*****************/
         $("#references-list").on('click', 'a', function() {
-            gtag('event', 'outbound', {'url': $(this).attr('href'), 'path': location.pathname});
+            dataLayer.push({'event': 'outbound', 'url': $(this).attr('href'), 'path': location.pathname});
         });
 
         /*****************/
         /** BUTTONS **/
         /*****************/
         $(".menu-toggle").on('click', function() { //MENU BUTTON
-            gtag('event', 'button_menu', {'data': $(this).attr('data-placement'), 'path': location.pathname});
+            dataLayer.push({'event': 'button_menu', 'data': $(this).attr('data-placement'), 'path': location.pathname});
         });
         $(".weblang-toggle").on('click', function() { //LANG BUTTON
-            gtag('event', 'button_lang', {'path': location.pathname});
+            dataLayer.push({'event': 'button_lang', 'path': location.pathname});
         });
         $("#arkeyb").on('click', function() { //KEYBOARD BUTTON
             $(this).on('click', function() {
-                gtag('event', 'button_keyboard', {'path': location.pathname});
+                dataLayer.push({'event': 'button_keyboard', 'path': location.pathname});
             });
         });
         $("#btn-search-topic").on('click', function() { //SEARCH BUTTON
-            gtag('event', 'button_search', {'path': location.pathname});
+            dataLayer.push({'event': 'button_search', 'path': location.pathname});
         });
         $("#show-more").on('click', function() { //SHOW MORE RESULTS BUTTON
             var data = {
@@ -18837,10 +18837,10 @@ $(window).on('load', function() {
                 'translation': $(".dropdown-lang").attr("data-selected-lang"),
                 'lang': i18n.lng()
             }
-            gtag('event', 'button_showmore', {'data': JSON.stringify(data), 'path': location.pathname});
+            dataLayer.push({'event': 'button_showmore', 'data': JSON.stringify(data), 'path': location.pathname});
         });
         $("#alphabetTerms-nav").on('click', ' .key', function() { //ALPHA KEYS BUTTONS
-            gtag('event', 'button_alphakeys', {'title': $(this).text(), 'path': location.pathname});
+            dataLayer.push({'event': 'button_alphakeys', 'title': $(this).text(), 'path': location.pathname});
         });
 
         /*****************/
@@ -18848,14 +18848,14 @@ $(window).on('load', function() {
         /*****************/
         if(QI.globals.pageType === 2){
             $(".audio-flat").on('click', 'a', function() { //PLAY AUDIO
-                gtag('event', 'surah_audio', {'title': $(this).parent().attr('src'), 'path': location.pathname});
+                dataLayer.push({'event': 'surah_audio', 'title': $(this).parent().attr('src'), 'path': location.pathname});
             });
             $(".surah-container").on('click', '.surah-options a', function() { //SURAH OPTIONS
                 var info = ($(this).attr('href')) ? $(this).attr('href') : $(this).attr('title');
                 if($(this).hasClass('reading-mode') || $(this).hasClass('tafsir-mode') || $(this).hasClass('scroll-mode')){
                     info = info + " | " + $(this).attr('class');
                 }
-                    gtag('event', 'surah_options', {'info': info, 'path': location.pathname});
+                    dataLayer.push({'event': 'surah_options', 'info': info, 'path': location.pathname});
             });
             $(".jumbotron").on('click', '.col-xs-1', function() { //PREV-NEXT ARROWS SURAHS
                 var arrowDirection = "";
@@ -18865,7 +18865,7 @@ $(window).on('load', function() {
                 if($(this).hasClass("arrow-next")){
                     arrowDirection = "next";
                 }
-                gtag('event', 'surah_adjacents', {'arrowDirection': arrowDirection, 'path': location.pathname});
+                dataLayer.push({'event': 'surah_adjacents', 'arrowDirection': arrowDirection, 'path': location.pathname});
             });
             $("[data-toggle='popover']").on('shown.bs.popover', function (e) {
                 $(".btn-tafsir-options").on('click', function(index) { //TAFSIR BUTTONS
@@ -18892,7 +18892,7 @@ $(window).on('load', function() {
                             break;
                     }
                     info += " " + $(".tafsir-text").attr("id");
-                        gtag('event', 'tafsir_options', {'info': info, 'path': location.pathname});
+                        dataLayer.push({'event': 'tafsir_options', 'info': info, 'path': location.pathname});
                 });
             });
         }
@@ -18902,16 +18902,16 @@ $(window).on('load', function() {
         /*****************/
         if(QI.globals.pageType === 1){
             $(".aya-options:not(.surah-options)").on('click', 'a.playtoggle', function() { //PLAY AUDIO
-                    gtag('event', 'verse_audio', {'id': $(this).attr('id'), 'path': location.pathname});
+                    dataLayer.push({'event': 'verse_audio', 'id': $(this).attr('id'), 'path': location.pathname});
             });
             $(".aya-options:not(.surah-options)").on('click', 'a:not(.playtoggle)', function() { //VERSE OPTIONS
-                    gtag('event', 'verse_options', {'title': $(this).attr('title'), 'path': location.pathname});
+                    dataLayer.push({'event': 'verse_options', 'title': $(this).attr('title'), 'path': location.pathname});
             });
             $(".souratname").find("a").first().on('click', function() { //SURAH NAME
-                    gtag('event', 'surah_name_container', {'title': $(this).attr('title'), 'path': location.pathname});
+                    dataLayer.push({'event': 'surah_name_container', 'title': $(this).attr('title'), 'path': location.pathname});
             });
             $(".alert-success").on('click', 'a', function() { //SURAH NAME IN SUCCESS
-                    gtag('event', 'surah_name_alert', {'title': $(this).attr('href'), 'path': location.pathname});
+                    dataLayer.push({'event': 'surah_name_alert', 'title': $(this).attr('href'), 'path': location.pathname});
             });
         }
 });
