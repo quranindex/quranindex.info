@@ -18710,7 +18710,7 @@ $(window).on('load', function() {
         //     return;
 
         // load google analytics
-        // if(!window.dataLayer) {
+        if(!window.dataLayer) {
             // (function(e,t,n,r,i,s,o){e["GoogleAnalyticsObject"]=i;e[i]=e[i]||function(){(e[i].q=e[i].q||[]).push(arguments)},e[i].l=1*new Date;s=t.createElement(n),o=t.getElementsByTagName(n)[0];s.async=1;s.src=r;o.parentNode.insertBefore(s,o)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");
             // gtag('create', 'UA-52330832-1', 'auto');
             // gtag("require","displayfeatures");
@@ -18726,10 +18726,14 @@ $(window).on('load', function() {
             }
             loadGoogleAnalytics(); //Create the script  
             window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
+        }
+        
+        function gtag(){dataLayer.push(arguments);}
+        
+        if(!window.dataLayer) {
             gtag('js', new Date());
             gtag('config', 'G-J8L1C042QH');
-        // }
+        }
 
         /*****************/
         /** TRANSLATION LINKS **/
