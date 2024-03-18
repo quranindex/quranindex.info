@@ -18727,8 +18727,8 @@ $(window).on('load', function() {
             loadGoogleAnalytics(); //Create the script  
             window.dataLayer = window.dataLayer || [];
             // function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-J8L1C042QH');
+            dataLayer.push({'js': new Date()});
+            dataLayer.push({'config': 'G-J8L1C042QH'});
         }
 
         /*****************/
