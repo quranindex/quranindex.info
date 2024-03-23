@@ -24678,7 +24678,9 @@ module.exports = exports["default"];
                 var details_html = "<ul class='list-details'><li><span>" + langTerms.details.type + "<strong>"+details_obj.type+"</strong></span></li><li><span>" + langTerms.details.order + "<strong>"+params.souratNb+"</strong></span></li><li><span>" + langTerms.details.nbverses + "<strong>"+details_obj.nbverses+"</strong></span></li><li><span>" + langTerms.details.nbwords + "<strong>"+details_obj.nbwords+"</strong></span></li><li><span>" + langTerms.details.nbrukus + "<strong>"+details_obj.nbrukus+"</strong></span></li><li><span>" + langTerms.details.tafsir + "<strong>"+details_obj.tafsir+"</strong></span></li><li><span>" + langTerms.details.reading + "<strong>"+details_obj.reading+"</strong></span></li></ul>";
                 optionContainerStr += '<li><a title="'+langTerms.information+'" rel="nofollow" title="' + langTerms.details.title + '" class="popover-container" role="button" tabindex=0 id="popover-details-' + params.ayaContainer + '" data-container="body" data-toggle="popover" data-placement="top" data-content="'+details_html+'" data-html="true" data-trigger="focus"><div class="icon-container"><span class="icon-info icon" style="float:right"></span></div></a></li>';
             }
-            if (plugin.settings.audio){
+            // don't show play icon if there is no URL associated for verse by verse reading
+            var reciterUrl = $('#'+params.reciter).attr("data-url");
+            if (plugin.settings.audio && reciterUrl){
                 optionContainerStr += '<li><audio class="audio_player" id="audio-' + params.ayaContainer + '"></audio><a rel="nofollow" title="' + langTerms.play + '" class="playtoggle" id="playtoggle-' + params.ayaContainer + '" data-reciter="' + params.reciter + '" onclick="$(\'#' + element + '\').data(\'Ayat\').playAudio('+params.isMultipleAyat+',\'' + params.ayaContainer + '\',' + params.souratNb + ',' + ayatToPlay + ')"><div class="icon-container"><span class="icon-play icon" style="float:right"></span></div></a></li>';
             }
 
