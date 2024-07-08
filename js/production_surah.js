@@ -23964,7 +23964,7 @@ module.exports = exports["default"];
 
                 // highlight search results depending on verses lang
                 var current_verselang = $(".dropdown-lang").attr("data-selected-lang");
-                if(QI.globals.highlight && (current_verselang=="ar" || current_verselang=="en" || current_verselang=="fr")){
+                if(QI.globals.highlight && (current_verselang=="ar" || current_verselang=="en" || current_verselang=="fr" || current_verselang=="es")){
 
                     /** NEW HIGHLIGHTER **/
                     // if($("#search").data("highlights")){
