@@ -13258,7 +13258,7 @@ String.prototype.ucfirst = function() {
         // ["el", "Greek", [1,2], 2],
         ["en", "English", [1,2], 2],
         // ["eo", "Esperanto",[1,2], 2],
-        // ["es", "Spanish", [1,2], 2],
+        ["es", "Spanish", [1,2], 2],
         // ["es_ar","Argentinean Spanish", [1,2], 2],
         // ["et", "Estonian", [1,2], 2],
         // ["eu", "Basque", [1,2], 2],
