@@ -15181,7 +15181,7 @@ QI.main = {
 			cookieDomain: QI.globals.base_url.replace('https://', '.').replace('/', ''),
 			fallbackLng: 'en',
 			load: 'unspecific',
-			supportedLngs: ['en', 'fr', 'ar'],
+			supportedLngs: ['en', 'fr', 'ar', 'es'],
 			// debug: true
 		}, function (t) {
 			$(document).i18n();
@@ -24745,7 +24745,7 @@ module.exports = exports["default"];
                 $(".dropdown-weblang a, link[rel=alternate]").each(function() {
 
                     // if full-text search, then replace it with qi/fr, qi/ar, qi/
-                    var langCode = (QI.globals.resultData.text_search) ? $(this).attr("hreflang") : "search/" + Object.byString(QI.globals.resultData, $( this ).attr('hreflang')).toLowerCase()
+                    var langCode = (QI.globals.resultData.text_search) ? $(this).attr("hreflang") : "search/" + Object.byString(QI.globals.resultData, $( this ).attr('hreflang')).toLowerCase().replaceAll(' ', '-');
 
                     langCode = langCode === "en" ? "" : langCode;
                     $( this ).attr('href', QI.globals.base_url + langCode);
@@ -25184,7 +25184,7 @@ QI.functions = {
 
     // set user data eg. reciter, lang ..
     setuserData: function(contentLoaded){
-        console.log("setuserData");
+        // console.log("setuserData");
 
         if(!QI.globals.userSettings)
             return;
