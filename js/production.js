@@ -25741,7 +25741,7 @@ window.addEventListener('load', function(){
 
     // search
     if(!QI.globals.errorPage && QI.globals.pageType === 1){
-        QI.functions.getTerm(location.href.match(/([^\/]*)\/*$/)[1]);
+        QI.functions.getTerm(location.href.match(/([^\/]*)\/*$/)[1].replace(/\?.*$/, ''));  // REMOVE QUERY PARAM
     }
 
     QI.functions.initAutocomplete();
@@ -25797,6 +25797,9 @@ QI.events = {
 
             // remove white space at beginning
             term = term.replace(/^\s+/, '');
+
+            // remove any query params
+            term = term.replace(/\?.*$/, '');
 
             if(term.length > 0){
 
