@@ -25244,27 +25244,51 @@ QI.functions = {
             // }
         }
         else{
-            if(!QI.functions.localData("u_lang")){
+
+            var queryString = window.location.search;
+            var urlParams = new URLSearchParams(queryString);
+            var langParam = urlParams.get('lang');
+            var reciterParam = urlParams.get('reciter');
+
+            // check if lang and reciter are valid
+            var validLangs = $('.dropdown-lang .row:nth-child(3) .list-lang').toArray().map(function(item) {return item.getAttribute('data-lang')});
+            var validReciters = $('.dropdown-reciter .row:nth-child(3) .list-lang').toArray().map(function(item) {return item.getAttribute('data-reciter')});
+            if (!validLangs.includes(langParam)) {
+                langParam = 'ar';
+            }
+            if (!validReciters.includes(reciterParam)) {
+                reciterParam = 'sudais';
+            }
+            
+            if (langParam) {
+                $(".dropdown-lang").attr("data-selected-lang", langParam);
+                QI.functions.localData("u_lang", langParam);
+            }
+            else if(!QI.functions.localData("u_lang")){
                 var lang = $(".list-lang.selected").attr("data-lang");
                 $(".dropdown-lang").attr("data-selected-lang", lang);
                 QI.functions.localData("u_lang", lang);
             }
             else{
                 $(".dropdown-lang").attr("data-selected-lang", QI.functions.localData("u_lang"));
-                $(".list-lang").removeClass("selected");
-                $("div[data-lang='"+QI.functions.localData("u_lang")+"']").addClass("selected");
             }
+            $(".list-lang").removeClass("selected");
+            $("div[data-lang='"+QI.functions.localData("u_lang")+"']").addClass("selected");
 
-            if(!QI.functions.localData("u_reciter")){
+            if (reciterParam) {
+                $(".dropdown-reciter").attr("data-selected-reciter", reciterParam);
+                QI.functions.localData("u_reciter", reciterParam);
+            }
+            else if(!QI.functions.localData("u_reciter")){
                 var reciter = $(".list-reciter.selected").attr("id");
                 $(".dropdown-reciter").attr("data-selected-reciter", reciter);
                 QI.functions.localData("u_reciter", reciter);
             }
             else{
                 $(".dropdown-reciter").attr("data-selected-reciter", QI.functions.localData("u_reciter"));
-                $(".list-reciter").removeClass("selected");
-                $("#"+QI.functions.localData("u_reciter")).addClass("selected");
             }
+            $(".list-reciter").removeClass("selected");
+            $("#"+QI.functions.localData("u_reciter")).addClass("selected");
 
             if(!QI.functions.localData("u_fontsize")){
                 var fontsize = $("#ayat_fontsize_in").attr("value");
